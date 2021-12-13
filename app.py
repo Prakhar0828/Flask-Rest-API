@@ -13,8 +13,8 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # flask_sqlalchemy is an extension of sqlalchemy library
 
 uri = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
-if uri.startswith("postgres://"):
-    uri = uri.replace("postgres://", "postgresql://", 1)
+# if uri.startswith("postgres://"):
+#     uri = uri.replace("postgres://", "postgresql://", 1)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = uri  # 3 slashes mean data.db resides in root dir of project(where our code runs)
 # With line 9, we have turned off tracker of flask_sqlalchemy, as sqlalchemy is already tracking modifications in model objs 
