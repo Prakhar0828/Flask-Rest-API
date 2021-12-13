@@ -2,6 +2,7 @@ from flask import Flask
 from flask_restful import Api
 from flask_jwt import JWT
 
+from db import db
 from resources.user import UserRegister
 from security import authenticate, identity
 from resources.item import Item, ItemList
@@ -13,6 +14,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'  # 3 slashes mean da
 # With line 9, we have turned off tracker of flask_sqlalchemy, as sqlalchemy is already tracking modifications in model objs 
 app.secret_key = 'prakhar'
 api = Api(app)
+db.init_app(app)
 
 @app.before_first_request  
 def create_tables():
@@ -31,6 +33,4 @@ api.add_resource(UserRegister, '/register')
 api.add_resource(StoreList, '/stores')
 
 if __name__ == '__main__':
-    from db import db
-    db.init_app(app)
     app.run(port=5000, debug = True)
